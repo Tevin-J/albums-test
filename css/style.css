@@ -1,0 +1,116 @@
+html {
+    box-sizing: border-box;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+body {
+    font-size: 16px;
+    font-style: normal;
+    line-height: 1.2;
+    font-weight: normal;
+    color: black;
+}
+/*img {
+    max-width: 100%;
+    height: auto;
+}*/
+/*Header styles start*/
+.header {
+    width: 100%;
+    background-color: #ff94ff;
+}
+.header__wrapper {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+.header__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.header__link {
+    font-size: 24px;
+    color: blue;
+    cursor: pointer;
+    position: relative;
+}
+.header__link:after {
+    display: block;
+    content: '';
+    width: 100%;
+    height: 2px;
+    background-color: blue;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+/*Header styles end*/
+/*Users styles start*/
+.users {
+    min-height: 100vh;
+    background-color: #94ffff;
+}
+.users__wrapper {
+    max-width: 1360px;
+    margin: 0 auto;
+}
+.user__info {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+.user__pointer {
+    height: 12px;
+    width: 12px;
+}
+/*Users styles end*/
+/*Album styles start*/
+.album {
+    margin-bottom: 20px;
+}
+.album__info {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+.album__pointer {
+    height: 12px;
+    width: 12px;
+}
+.album__photos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/*Album styles end*/
+/*Photo styles start*/
+.photo {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+}
+.photo__small {
+    object-fit: cover;
+}
+.photo__star {
+    cursor: pointer;
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    top: 0;
+    left: -40px;
+    display: block;
+
+}
+.photo__star_grey {
+    background: url("../img/svg/star-grey.svg") no-repeat left center;
+    background-size: 30px;
+}
+.photo__star_gold {
+    background: url("../img/svg/star-gold.svg") no-repeat left center;
+    background-size: 30px;
+}
+/*Photo styles end*/
