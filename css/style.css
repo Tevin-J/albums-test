@@ -15,10 +15,14 @@ body {
     max-width: 100%;
     height: auto;
 }*/
+.main {
+    min-width: 100vh;
+    background-color: #f7f9fa;
+}
 /*Header styles start*/
 .header {
     width: 100%;
-    background-color: #ff94ff;
+    background-color: #117DC1;
 }
 .header__wrapper {
     max-width: 1060px;
@@ -33,11 +37,11 @@ body {
 }
 .header__link {
     font-size: 24px;
-    color: blue;
+/*    color: blue;*/
     cursor: pointer;
     position: relative;
 }
-.header__link:after {
+/*.header__link:after {
     display: block;
     content: '';
     width: 100%;
@@ -46,39 +50,54 @@ body {
     position: absolute;
     bottom: 0;
     left: 0;
-}
+}*/
 /*Header styles end*/
 /*Users styles start*/
-.users {
+/*.users {
     min-height: 100vh;
     background-color: #94ffff;
-}
+}*/
 .users__wrapper {
     max-width: 1360px;
     margin: 0 auto;
 }
-.user__info {
+.user {
     margin-bottom: 20px;
+}
+.user__name {
+    padding-left: 20px;
     cursor: pointer;
 }
-.user__pointer {
-    height: 12px;
-    width: 12px;
+.user__name_close {
+    background: url("../img/svg/pointer.svg") no-repeat left center;
+    background-size: 12px;
+}
+.user__name_open {
+    background: url("../img/svg/pointer-open.svg") no-repeat left center;
+    background-size: 12px;
 }
 /*Users styles end*/
 /*Album styles start*/
 .album {
-    margin-bottom: 20px;
+    margin: 20px 0;
+    padding-left: 20px;
 }
-.album__info {
-    margin-bottom: 20px;
+.album__name {
+    padding-left: 20px;
     cursor: pointer;
 }
-.album__pointer {
-    height: 12px;
-    width: 12px;
+.album__name_close {
+    background: url("../img/svg/pointer.svg") no-repeat left center;
+    background-size: 12px;
+}
+.album__name_open {
+    background: url("../img/svg/pointer-open.svg") no-repeat left center;
+    background-size: 12px;
 }
 .album__photos {
+    display: none;
+}
+.album__photos.active {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -93,7 +112,7 @@ body {
     margin-bottom: 20px;
 }
 .photo__small {
-    object-fit: cover;
+    cursor: pointer;
 }
 .photo__star {
     cursor: pointer;
@@ -114,3 +133,58 @@ body {
     background-size: 30px;
 }
 /*Photo styles end*/
+
+
+
+.modal {
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    position: fixed;
+}
+.modal.active {
+    display: block;
+}
+
+.modal .content {
+    width: 600px;
+    height: 600px;
+    overflow: scroll;
+    position: fixed;
+    top: 25%;
+    left: 33%;
+    background-color: grey;
+}
+
+.modal .background {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(10,24,41,0.82);
+}
+
+.user__albums {
+    display: none;
+}
+.user__albums.active {
+    display: block;
+}
+.favorite {
+
+}
+.favorite__title {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 40px;
+}
+.favorite__photos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
