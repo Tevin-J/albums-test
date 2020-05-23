@@ -1,12 +1,14 @@
 const favoriteView = {
+
     _state: null,
+
     setState(state) {
         this._state = state
     },
 
     _element: null,
 
-
+    /*метод отрисовки блока избранных фото*/
     render() {
 
         document.getElementById('root').innerHTML = ` 
@@ -15,14 +17,17 @@ const favoriteView = {
                     favorite photos
                 </div>
                 <div class="favorite__photos" id="favorite__photos"></div>
-            </div>`
+            </div>`;
 
-        this._element = document.getElementById('favorite__photos')
+        /*получаем блок, в который будем помещать избранные фото*/
+        this._element = document.getElementById('favorite__photos');
 
-        let favoritePhotos = this._state.getFavoritePhotos()
+        /*получаем из state избранные фото*/
+        let favoritePhotos = this._state.getFavoritePhotos();
 
-        let htmlString = ``
+        let htmlString = ``;
 
+        /*накапливаем разметку*/
         favoritePhotos.forEach(
             (p) => {
                 htmlString += `
@@ -35,67 +40,63 @@ const favoriteView = {
                         <span class="photo__star photo__star_gold" 
                             data-photo-id=${p.id}
                             id="star-${p.id}"></span>
-                    </div>
-                `
+                    </div>`
             }
-        )
+        );
 
-        this._element.innerHTML = htmlString
+        /*вставляем накопленную разметку в блок избранных фото*/
+        this._element.innerHTML = htmlString;
 
-        let favPhotosElements = this._element.querySelectorAll('.photo img')
+        /*вешаем обработчик клика на фотографии*/
+        let favPhotosElements = this._element.querySelectorAll('.photo img');
+
         favPhotosElements.forEach(pEl => {
             pEl.addEventListener('click', (e) => {
-
                 let albumId = +e.currentTarget.dataset.albumId;
                 let photoId = +e.currentTarget.dataset.photoId;
                 this.onFavPhotoClick(albumId, photoId)
             })
-        })
+        });
 
-        let starsElements = this._element.querySelectorAll('.photo span.photo__star')
+        /*получаем элементы звезд со страницы*/
+        let starsElements = this._element.querySelectorAll('.photo span.photo__star');
+
+        /*вешаем обработчик клика на звезды*/
         starsElements.forEach(sEl => {
             sEl.addEventListener('click', async (e) => {
-                let photoId = +e.currentTarget.dataset.photoId
-                let favoritePhoto = favoritePhotos.filter(fP => fP.id === photoId)
+                /*получаем id фото из дата-атрибутов*/
+                let photoId = +e.currentTarget.dataset.photoId;
 
-                let isFavorite = await this._state.toggleFavorite(...favoritePhoto)
-                if (isFavorite) {
-                    e.currentTarget.classList.add('photo__star_gold');
-                    e.currentTarget.classList.remove('photo__star_grey');
-                } else {
-                    e.currentTarget.classList.remove('photo__star_gold');
-                    e.currentTarget.classList.add('photo__star_grey');
-                    await this.render()
-                }
+                /*получаем фото, на которое был клик из массива избранных фото*/
+                let favoritePhoto = favoritePhotos.filter(fP => fP.id === photoId);
+
+                this.onStarClick(photoId, favoritePhoto);
             })
         })
     },
+
+    /*обработчик клика на фото*/
     async onFavPhotoClick(albumId, photoId) {
+
         let photo = this._state.getFavoritePhoto(albumId, photoId);
+
         modal.show(`<img src="${photo.url}"/>`);
+
+    },
+
+    /*обработчик клика на звезду*/
+    async onStarClick(photoId, favoritePhoto) {
+
+        let star = document.querySelector(`#star-${photoId}`);
+
+        /*вызываем метод, который уберет из массива избранных фото текущее фото и перерисует новый массив*/
+        await this._state.toggleFavorite(...favoritePhoto);
+
+        star.classList.remove('photo__star_gold');
+        star.classList.add('photo__star_grey');
+
+        this.render()
+
     }
-}
 
-
-/*
-onFavPhotoClick() {
-    /!*получаем все фото из альбома*!/
-    let photosElements = document.querySelectorAll('.photo img');
-
-    /!*проходим по массиву фото и вешаем на фотографии обработчик клика, затем вызываем модуль
-    показа модального окна с большой версией фотографии*!/
-    photosElements.forEach(pEl => {
-        pEl.addEventListener('click', (e) => {
-            /!*запрещаем всплытие события*!/
-            e.stopPropagation();
-
-            /!*получаем из дата-атрибутов id альбома и фото, чтоб выполнить метод state по получению
-            конкретного объекта фото, из свойста _photos, затем вызываем метод по показу модального
-            окна и внутрь параметром отправляем большую версию фотографии*!/
-            let albumId = +e.currentTarget.dataset.albumId;
-            let photoId = +e.currentTarget.dataset.photoId;
-            let photo = this._state.getFavoritePhoto(albumId, photoId);
-
-            modal.show(`<img src="${photo.url}"/>`);
-        });
-    })*/
+};

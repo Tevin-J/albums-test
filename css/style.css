@@ -11,12 +11,8 @@ body {
     font-weight: normal;
     color: black;
 }
-/*img {
-    max-width: 100%;
-    height: auto;
-}*/
 .main {
-    min-width: 100vh;
+    min-height: 100vh;
     background-color: #f7f9fa;
 }
 /*Header styles start*/
@@ -37,26 +33,11 @@ body {
 }
 .header__link {
     font-size: 24px;
-/*    color: blue;*/
     cursor: pointer;
     position: relative;
 }
-/*.header__link:after {
-    display: block;
-    content: '';
-    width: 100%;
-    height: 2px;
-    background-color: blue;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}*/
 /*Header styles end*/
 /*Users styles start*/
-/*.users {
-    min-height: 100vh;
-    background-color: #94ffff;
-}*/
 .users__wrapper {
     max-width: 1360px;
     margin: 0 auto;
@@ -75,6 +56,12 @@ body {
 .user__name_open {
     background: url("../img/svg/pointer-open.svg") no-repeat left center;
     background-size: 12px;
+}
+.user__albums {
+    display: none;
+}
+.user__albums_active {
+    display: block;
 }
 /*Users styles end*/
 /*Album styles start*/
@@ -95,12 +82,12 @@ body {
     background-size: 12px;
 }
 .album__photos {
+    margin-top: 20px;
     display: none;
 }
 .album__photos.active {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 /*Album styles end*/
@@ -133,9 +120,7 @@ body {
     background-size: 30px;
 }
 /*Photo styles end*/
-
-
-
+/*modal styles start*/
 .modal {
     display: none;
     width: 100%;
@@ -144,11 +129,10 @@ body {
     left: 0px;
     position: fixed;
 }
-.modal.active {
+.modal_active {
     display: block;
 }
-
-.modal .content {
+.modal__content {
     width: 600px;
     height: 600px;
     overflow: scroll;
@@ -157,8 +141,7 @@ body {
     left: 33%;
     background-color: grey;
 }
-
-.modal .background {
+.modal__background {
     top: 0px;
     left: 0px;
     width: 100%;
@@ -166,16 +149,8 @@ body {
     position: fixed;
     background-color: rgba(10,24,41,0.82);
 }
-
-.user__albums {
-    display: none;
-}
-.user__albums.active {
-    display: block;
-}
-.favorite {
-
-}
+/*modal styles end*/
+/*favorite styles start*/
 .favorite__title {
     margin-bottom: 20px;
     text-align: center;
@@ -187,4 +162,5 @@ body {
     align-items: center;
     min-height: 100vh;
 }
+/*favorite styles end*/
 

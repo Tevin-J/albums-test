@@ -1,4 +1,5 @@
 (async () => {
+
     modal.init();
     state.init();
 
@@ -20,15 +21,11 @@
             default:
                 alert('default page');
         }
-    }
+    };
 
     showPage();
 
     /*вызываем showPage всякий раз, когда изменится хэш*/
     window.addEventListener('hashchange', showPage)
 
-
 })();
-
-
-
