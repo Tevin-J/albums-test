@@ -14,7 +14,7 @@ const favoriteView = {
         document.getElementById('root').innerHTML = ` 
             <div class="favorite">
                 <div class="favorite__title">
-                    favorite photos
+                    ИЗБРАННЫЕ ФОТО
                 </div>
                 <div class="favorite__photos" id="favorite__photos"></div>
             </div>`;
@@ -89,12 +89,14 @@ const favoriteView = {
 
         let star = document.querySelector(`#star-${photoId}`);
 
-        /*вызываем метод, который уберет из массива избранных фото текущее фото и перерисует новый массив*/
+        /*вызываем метод, который уберет из массива избранных фото текущее*/
         await this._state.toggleFavorite(...favoritePhoto);
 
+        /*меняем класс подстветки звезды*/
         star.classList.remove('photo__star_gold');
         star.classList.add('photo__star_grey');
 
+        /*перерисовываем страницу, отображая на ней новый массив избранных фото*/
         this.render()
 
     }

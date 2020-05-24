@@ -1,5 +1,6 @@
 (async () => {
 
+    /*инициализируем работу по закрытию модального окна и записи в state данных из localStorage*/
     modal.init();
     state.init();
 
@@ -19,10 +20,11 @@
                 catalogView.renderUsers();
                 break;
             default:
-                alert('default page');
+                defaultView.render();
         }
     };
 
+    /*вызываем showPage() для первой отрисовки*/
     showPage();
 
     /*вызываем showPage всякий раз, когда изменится хэш*/

@@ -38,7 +38,7 @@ const catalogView = {
                         <span class="user__name user__name_close" id="user-name-${u.id}" data-user-id=${u.id}>
                             ${u.name}
                          </span>
-                         <div id="user-${u.id}" data-loaded="false" class="user__albums"></div>
+                         <div id="user-${u.id}" class="user__albums"></div>
                     </div>`
             }
 
@@ -78,14 +78,6 @@ const catalogView = {
             return
         }
 
-        /*если дата-атрибуту loaded присвоился true, то покажем альбомы. изначально false*/
-        /*if (targetElement.dataset.loaded === 'true') {
-            userName.classList.remove('user__name_close')
-            userName.classList.add('user__name_open')
-            targetElement.classList.add('active');
-            return;
-        }*/
-
         /*отправляем запрос на сервер за альбомами юзера и записываем их в state в переменную _albums*/
         await this._state.loadAlbums(userId);
 
@@ -102,14 +94,13 @@ const catalogView = {
                 <span class="album__name album__name_close" data-album-id=${a.id} id="album-${a.id}-title">
                     ${a.title}
                 </span>
-                <div class="album__photos" data-loaded="false" id="album-${a.id}"></div>
+                <div class="album__photos" id="album-${a.id}"></div>
             </div>`
         });
 
         /*вставляем весь накопленный html в блок альбомов, присваиваем дата-атрибуту loaded true
         и добавляем класс active. тем самым у нас происходит отображение альбомов*/
         targetElement.innerHTML = htmlString;
-        /*targetElement.dataset.loaded = 'true';*/
         targetElement.classList.add('user__albums_active');
         userName.classList.remove('user__name_close');
         userName.classList.add('user__name_open');
@@ -143,20 +134,12 @@ const catalogView = {
         let targetElement = document.querySelector(`#album-${albumId}`);
 
         /*если у блока с альбомами есть класс active, то при клике на юзера прячем альбомы. изначально нет active*/
-        if (targetElement.classList.contains('active')) {
+        if (targetElement.classList.contains('album__photos_active')) {
             albumName.classList.remove('album__name_open');
             albumName.classList.add('album__name_close');
-            targetElement.classList.remove('active');
+            targetElement.classList.remove('album__photos_active');
             return
         }
-
-        /*если дата-атрибуту loaded присвоился true, то покажем альбомы. изначально false*/
-        /*if (targetElement.dataset.loaded === 'true') {
-            targetElement.classList.add('active');
-            albumName.classList.remove('album__name_close')
-            albumName.classList.add('album__name_open')
-            return;
-        }*/
 
         /*создаем переменную, в которой будем накапливать html для фотографий*/
         let htmlString = ``;
@@ -183,8 +166,7 @@ const catalogView = {
 
         /*добавляем в блок фотографий выбранного альбома разметку*/
         targetElement.innerHTML = htmlString;
-        targetElement.classList.add('active');
-        targetElement.dataset.loaded = 'true';
+        targetElement.classList.add('album__photos_active');
         albumName.classList.remove('album__name_close');
         albumName.classList.add('album__name_open');
 
@@ -242,7 +224,7 @@ const catalogView = {
         let star = document.querySelector(`#star-${photoId}`);
 
         /*проверяем, есть ли это фото в массиве избранных фото. в зависимости
-                от этого делаем звезду серой или золотой*/
+        от этого делаем звезду серой или золотой*/
         let isFavorite = await this._state.toggleFavorite(...photo);
 
         if (isFavorite) {

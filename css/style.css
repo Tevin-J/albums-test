@@ -11,25 +11,32 @@ body {
     font-weight: normal;
     color: black;
 }
+img {
+    max-width: 100%;
+    height: auto;
+}
 .main {
     min-height: 100vh;
     background-color: #f7f9fa;
+    padding-top: 50px;
 }
 /*Header styles start*/
 .header {
     width: 100%;
+    height: 100px;
     background-color: #117DC1;
 }
 .header__wrapper {
     max-width: 1060px;
+    height: 100%;
     margin: 0 auto;
-    padding: 50px 0;
 }
 .header__list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
 }
 .header__link {
     font-size: 24px;
@@ -67,9 +74,9 @@ body {
 /*Album styles start*/
 .album {
     margin: 20px 0;
-    padding-left: 20px;
 }
 .album__name {
+    margin-left: 20px;
     padding-left: 20px;
     cursor: pointer;
 }
@@ -85,7 +92,7 @@ body {
     margin-top: 20px;
     display: none;
 }
-.album__photos.active {
+.album__photos_active {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -125,25 +132,23 @@ body {
     display: none;
     width: 100%;
     height: 100%;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     position: fixed;
 }
 .modal_active {
     display: block;
 }
 .modal__content {
-    width: 600px;
-    height: 600px;
-    overflow: scroll;
+    max-width: 600px;
     position: fixed;
     top: 25%;
-    left: 33%;
+    left: 30%;
     background-color: grey;
 }
 .modal__background {
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     position: fixed;
@@ -163,4 +168,14 @@ body {
     min-height: 100vh;
 }
 /*favorite styles end*/
-
+/*default page styles start*/
+.default {
+    text-align: center;
+    font-size: 40px;
+}
+/*default page styles end*/
+@media screen and (max-width: 600px){
+    .modal__content {
+        left: 0;
+    }
+}
