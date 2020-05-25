@@ -137,13 +137,13 @@ img {
     position: fixed;
 }
 .modal_active {
-    display: block;
+    display: flex;
+    justify-content: center;
 }
 .modal__content {
     max-width: 600px;
     position: fixed;
     top: 25%;
-    left: 30%;
     background-color: grey;
 }
 .modal__background {
